@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="de.dertyp7214.rootutils">
+    package="de.dertyp7214.rootutilsapp">
 
     <application
-        android:name=".Application"
+        android:name="de.dertyp7214.rootutilsapp.Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RootUtils"
         tools:ignore="AllowBackup">
-        <activity android:name=".MainActivity">
+        <activity android:name="de.dertyp7214.rootutilsapp.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

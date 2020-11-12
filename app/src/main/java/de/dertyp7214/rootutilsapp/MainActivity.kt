@@ -1,8 +1,9 @@
-package de.dertyp7214.rootutils
+package de.dertyp7214.rootutilsapp
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import de.dertyp7214.rootutils.RequireRoot
 
 @RequireRoot(false)
 class MainActivity : AppCompatActivity() {
@@ -20,5 +21,5 @@ class MainActivity : AppCompatActivity() {
     }
 
     @RequireRoot(false)
-    fun String.d() {}
+    fun d() {}
 }
