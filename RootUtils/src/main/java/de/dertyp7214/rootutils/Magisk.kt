@@ -42,6 +42,10 @@ class Magisk private constructor() {
                 } ?: ArrayList()
         }
 
+    fun isModuleInstalled(id: String): Boolean {
+        return modules.any { it.id == id }
+    }
+
     fun installOrUpdateModule(meta: Module.Meta, files: Map<String, String?>) {
         val modulesDir = SuFile(MODULES_PATH, meta.id)
         modulesDir.mkdirs()

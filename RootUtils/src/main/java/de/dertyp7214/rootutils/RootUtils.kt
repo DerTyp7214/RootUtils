@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import android.util.Log
-import com.jaredrummler.android.shell.CommandResult
 import com.topjohnwu.superuser.Shell
 import com.topjohnwu.superuser.io.SuFile
 import com.topjohnwu.superuser.io.SuFileOutputStream
@@ -54,12 +53,17 @@ fun writeSuFile(file: SuFile, content: String) {
     }
 }
 
-fun runCommand(command: String): CommandResult {
-    return com.jaredrummler.android.shell.Shell.run(command)
+fun runCommand(command: String, callback: (result: Array<String>) -> Unit = {}): Boolean {
+    return Shell.su(command).exec().apply {
+        if (err.size > 0) err.toTypedArray().apply { callback(this) }.contentToString()
+        if (out.size > 0) out.toTypedArray().apply { callback(this) }.contentToString()
+    }.isSuccess.apply {
+        Log.d("RUN COMMAND", "$command -> $this")
+    }
 }
 
-fun String.asCommand(): CommandResult {
-    return runCommand(this)
+fun String.asCommand(callback: (result: Array<String>) -> Unit = {}): Boolean {
+    return runCommand(this, callback)
 }
 
 fun rootAccess(): Boolean {
@@ -68,4 +72,8 @@ fun rootAccess(): Boolean {
 
 fun getShell(): Shell {
     return Shell.getShell()
+}
+
+fun su(command: String): Shell.Job {
+    return Shell.su(command)
 }
