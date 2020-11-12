@@ -1,0 +1,3 @@
+include ':RootUtils'
+include ':app'
+rootProject.name = "RootUtils"
