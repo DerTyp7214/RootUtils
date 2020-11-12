@@ -30,14 +30,14 @@ fun init(application: Application) {
 }
 
 private fun inject(clazz: KClass<*>) {
-    clazz.memberProperties.forEach { it checkRoot clazz }
-    clazz.functions.forEach { it checkRoot clazz }
-    clazz checkRoot clazz
+    clazz.memberProperties.forEach { it.checkRoot() }
+    clazz.functions.forEach { it.checkRoot() }
+    clazz.checkRoot()
 
     clazz.nestedClasses.forEach { inject(it) }
 }
 
-private infix fun KAnnotatedElement.checkRoot(clazz: KClass<*>) {
+private fun KAnnotatedElement.checkRoot() {
     findAnnotation<RequireRoot>()?.apply {
         if (!Shell.rootAccess()) {
             Log.d("ROOT", "Root is not accessible for ${this@checkRoot}")
@@ -60,4 +60,12 @@ fun runCommand(command: String): CommandResult {
 
 fun String.asCommand(): CommandResult {
     return runCommand(this)
+}
+
+fun rootAccess(): Boolean {
+    return Shell.rootAccess()
+}
+
+fun getShell(): Shell {
+    return Shell.getShell()
 }
