@@ -7,7 +7,6 @@ import de.dertyp7214.rootutils.core.parseModuleMeta
 import java.io.File
 import kotlin.text.Charsets.UTF_8
 
-
 class Magisk private constructor() {
     companion object {
         const val MODULES_PATH = "/data/adb/modules"

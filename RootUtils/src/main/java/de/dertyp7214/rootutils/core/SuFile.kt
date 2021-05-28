@@ -5,7 +5,7 @@ import com.topjohnwu.superuser.io.SuFileInputStream
 import de.dertyp7214.rootutils.Magisk
 
 fun SuFile.parseModuleMeta(): Magisk.Module.Meta {
-    val text = SuFileInputStream(this).readBytes().toString(Charsets.UTF_8)
+    val text = SuFileInputStream.open(this).readBytes().toString(Charsets.UTF_8)
     val map = HashMap<String, Any>()
     text.split("\n").forEach {
         val line = it.split("=")
